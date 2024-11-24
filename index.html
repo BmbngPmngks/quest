@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer Questions</title>
+    <!-- icon -->
+    <link rel="icon" href="assets/image/logo/logo-bubbleshop-3.png">
+    <!-- boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--fonts google  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<style>
+
+:root{
+    --primary-color: rgb(37, 150, 190);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+.container{
+    overflow: hidden;
+    position: relative;
+    max-width: 600px;
+    height: 100dvh;
+    background-color: var(--primary-color);
+    margin: 0 auto;
+    padding: 1rem;
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    margin: 2rem 0px 1rem;
+}
+header h1{
+    font-weight: 500;
+    font-size: 25px;
+}
+header a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.content{
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content a{
+    text-decoration: none;
+    width: 170px;
+    height: 170px;
+    background-color: white;
+    font-size: 0.8rem;
+    color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0rem 1rem 3rem rgba(0,0,0,0.2);
+}
+.content a span{
+    text-align: center;
+}
+.box-absolute{
+    display: block;
+    position: absolute;
+    top: 50%; left: 50%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: fit-content;
+    padding: 1rem;
+    box-shadow: 0rem 1rem 3rem rgba(0,0,0,0.2);
+    border-radius: 10px;
+    transition: all 0.8s ease;
+}
+.box-absolute a{
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+}
+.box-absolute h1{
+    margin: 1rem 0 2.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+}
+.box-absolute p{
+    text-align: center;
+    color: gray;
+}
+.box-absolute.box-disabled{
+    top: -100%;
+}
+.info{
+    display: block;
+    position: absolute;
+    top: 50%; left: 50%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: fit-content;
+    padding: 1rem;
+    box-shadow: 0rem 1rem 3rem rgba(0,0,0,0.2);
+    border-radius: 10px;
+    transition: all 0.8s ease;
+}
+.info a{
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+}
+.info p{
+    margin: 1rem 0 2rem;
+    color: gray;
+    text-align: center;
+}
+.info p span{
+    display: inline;
+}
+.info span{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.info span #nama{
+    margin-left: 5px;
+    display: none;
+}
+.info.info-disabled{
+    top: -100%;
+}
+
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Answer The Questions</h1>
+            <a href="" class="btn-info">!</a>
+        </header>
+        <div class="content">
+            <a href="" class="box open-question" id="start">
+                <span>Klik Saya <br> Untuk Mulai Pertanyaan </span>
+            </a>
+        </div>
+        <div class="box-absolute box-disabled" id="box-absolute">
+            <a href="" class="open-question"><i class='bx bx-x'></i></a>
+            <h1>Pertanyaan Buat Kamu</h1>
+            <p id="output">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, ut.</p>
+        </div>
+        <div class="info info-disabled" id="content-info">
+            <a href="" class="btn-info"><i class='bx bx-x'></i></a>
+            <p>Game ini hanya hiburan dan game ini memiliki sebanyak <span id="total"></span> pertanyaan buat kalian<br> <br> Have Fun!</p>
+            <span id="maker">Dibuat Oleh <div id="nama">pmngks9596</div></span>
+        </div>
+    </div>
+<script>
+
+const openQuest = document.querySelectorAll('.open-question');
+const box = document.getElementById('box-absolute');
+
+openQuest.forEach(btn => {
+    btn.addEventListener('click', function(e){
+        e.preventDefault();
+
+        if(box.classList.contains('box-disabled')){
+            box.classList.remove('box-disabled');
+        }else{
+            box.classList.add('box-disabled');
+        }
+    });
+});
+
+const openInfo = document.querySelectorAll('.btn-info');
+const content = document.getElementById('content-info');
+
+openInfo.forEach(btn => {
+    btn.addEventListener('click', function(e){
+        e.preventDefault();
+
+        if(content.classList.contains('info-disabled')){
+            content.classList.remove('info-disabled');
+        }else{
+            content.classList.add('info-disabled');
+        }
+    });
+});
+
+const span = document.getElementById('maker');
+const nama = document.getElementById('nama');
+span.addEventListener('click', function(e){
+    e.preventDefault();
+    
+    if(span.classList.contains('active')){
+        nama.style.display = 'none';
+        span.classList.remove('active');
+    }else{
+        nama.style.display = 'inline';
+        span.classList.add('active');
+    }
+});
+
+const questions = [
+    "Apa definisi cinta sejati menurut kamu?",
+    "Kalau kamu sedang jatuh cinta, apa yang biasanya berubah dari diri kamu?",
+    "Apa momen paling romantis yang pernah kamu alami?",
+    "Menurut kamu, hal kecil apa yang bisa bikin pasangan terasa spesial?",
+    "Kalau lagi kangen sama seseorang, biasanya kamu ngapain?",
+    "Apa yang bikin kamu merasa nyaman sama seseorang?",
+    "Kamu lebih suka tipe pasangan yang ekspresif atau yang tenang tapi perhatian?",
+    "Pernah nggak merasa cinta pada pandangan pertama? Kalau iya, gimana rasanya?",
+    "Kalau kita sedang berdua, apa hal yang bikin kamu merasa paling bahagia?",
+    "Hal apa yang menurut kamu paling penting dalam hubungan?",
+    "Kalau sedang jatuh cinta, apa hal termanis yang pernah kamu lakukan?",
+    "Kamu lebih suka kencan romantis di tempat sepi atau seru-seruan di tempat ramai?",
+    "Apa bagian dari diri seseorang yang pertama kali menarik perhatian kamu?",
+    "Kalau pasangan kamu tiba-tiba kasih kejutan, kamu paling suka kejutan seperti apa?",
+    "Kamu percaya nggak kalau seseorang bisa saling melengkapi kekurangan masing-masing?",
+    "Apa lagu cinta favorit kamu yang selalu bikin kamu baper?",
+    "Kalau ada yang nanya, 'Kenapa kamu jatuh cinta sama aku?' Kira-kira apa jawabannya?",
+    "Menurut kamu, apa arti 'saling' dalam hubungan?",
+    "Apa pendapat kamu tentang cinta yang berkembang dari pertemanan?",
+    "Kalau kita bikin cerita romantis, kamu pengen endingnya kayak apa?",
+    "Apa hobi yang paling kamu nikmati saat sedang santai?",
+    "Film atau seri terakhir yang kamu tonton dan suka banget apa?",
+    "Kalau bisa jalan-jalan ke mana pun tanpa batas, kamu pengen ke mana?",
+    "Apa makanan favorit kamu yang bikin nggak pernah bosan?",
+    "Apa kenangan masa kecil yang paling berkesan buat kamu?",
+    "Kamu lebih suka pagi yang cerah atau malam yang tenang? Kenapa?",
+    "Apa lagu yang sering banget kamu putar belakangan ini?",
+    "Kalau kamu bisa punya satu kekuatan super, kamu pilih apa dan kenapa?",
+    "Apa hal kecil yang bisa bikin kamu bahagia dalam sehari?",
+    "Ada buku atau cerita yang pernah benar-benar menginspirasi kamu?",
+    "Kalau harus memilih, kamu lebih suka kucing atau anjing? Atau mungkin keduanya?",
+    "Apa cita-cita kamu waktu kecil? Masih kepikiran sampai sekarang nggak?",
+    "Kalau kamu bisa makan satu makanan doang seumur hidup, pilih apa?",
+    "Ada satu kebiasaan unik yang sering kamu lakukan tapi nggak banyak orang tahu?",
+    "Kamu lebih suka menghabiskan waktu sendiri atau kumpul sama banyak orang?",
+    "Apa hal paling spontan yang pernah kamu lakukan dalam hidup?",
+    "Kalau kamu bisa balik ke masa lalu, ada nggak momen yang pengen kamu ulang lagi?",
+    "Apa pendapat kamu tentang kejutan? Kamu lebih suka kasih kejutan atau dapat kejutan?",
+    "Siapa orang yang paling menginspirasi kamu dalam hidup?",
+    "Kalau kita bikin playlist bareng, lagu pertama apa yang harus ada di sana?",
+    "Apa yang pertama kali bikin kamu tertarik sama aku?",
+    "Kalau kita lagi duduk bareng menikmati senja, apa yang pengen kamu katakan ke aku?",
+    "Menurut kamu, apa yang bikin hubungan kita bisa bertahan selamanya?",
+    "Kalau suatu hari aku merasa sedih, apa yang bakal kamu lakukan untuk bikin aku tersenyum?",
+    "Apa momen yang paling kamu tunggu-tunggu kalau kita habiskan waktu bersama?",
+    "Kalau kita punya lagu khusus untuk hubungan kita, menurut kamu lagu apa yang cocok?",
+    "Apa hal kecil tentang aku yang menurut kamu paling menggemaskan?",
+    "Kamu pernah ngebayangin masa depan kita? Kalau iya, seperti apa?",
+    "Apa yang membuat kamu yakin bahwa aku adalah orang yang tepat untuk kamu?",
+    "Kalau suatu hari aku menulis surat cinta untukmu, apa yang ingin kamu baca di dalamnya?",
+    "Apa yang kamu pikirkan saat pertama kali melihat aku?",
+    "Apa hal sederhana yang aku lakukan tapi bikin kamu merasa istimewa?",
+    "Kalau aku tiba-tiba bilang 'Aku suka kamu,' apa yang akan kamu jawab?",
+    "Menurut kamu, apa arti tatapan mata yang tulus dalam sebuah hubungan?",
+    "Apa kenangan kecil dari aku yang nggak akan pernah kamu lupakan?",
+    "Kalau kita hanya punya satu hari untuk menghabiskan waktu bersama, bagaimana cara kamu membuatnya tak terlupakan?",
+    "Apa satu hal tentang aku yang kamu nggak pernah bosan lihat atau dengar?",
+    "Menurut kamu, apa bahasa cinta kita yang paling cocok untuk saling memahami?"
+];
+
+document.getElementById('total').innerHTML = questions.length;
+
+const btnStart = document.getElementById('start');
+const output = document.getElementById('output');
+
+btnStart.addEventListener('click', function(e){
+    e.preventDefault();
+
+    const rand = questions[Math.floor(Math.random() * questions.length )];
+    output.innerHTML = rand;
+});
+
+</script>
+</body>
+</html>
